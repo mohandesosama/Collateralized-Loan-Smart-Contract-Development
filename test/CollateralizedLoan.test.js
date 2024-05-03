@@ -14,7 +14,6 @@ describe("CollateralizedLoan", function () {
     [owner, addr1, addr2] = await ethers.getSigners();
     CollateralizedLoan = await ethers.getContractFactory("CollateralizedLoan");
     collateralizedLoan = await CollateralizedLoan.deploy();
-    // No need to call .deployed() here
   });
 
   it("Should deposit collateral", async function () {
