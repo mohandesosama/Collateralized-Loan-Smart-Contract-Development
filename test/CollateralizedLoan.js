@@ -1,6 +1,7 @@
 // test/CollateralizedLoan.test.js
 
 const { expect } = require("chai");
+const { ethers } = require("hardhat"); // Import ethers library
 
 describe("CollateralizedLoan", function () {
   let CollateralizedLoan;
@@ -13,7 +14,7 @@ describe("CollateralizedLoan", function () {
     [owner, addr1, addr2] = await ethers.getSigners();
     CollateralizedLoan = await ethers.getContractFactory("CollateralizedLoan");
     collateralizedLoan = await CollateralizedLoan.deploy();
-    await collateralizedLoan.deployed();
+    // No need to call .deployed() here
   });
 
   it("Should deposit collateral", async function () {
