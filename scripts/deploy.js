@@ -1,11 +1,10 @@
+const { lock } = require("ethers");
 const hre = require("hardhat");
 
 async function main() {
-    const currentTimeStampInSeconds = Math.round(Date.now()/1000);
-    const ONE_YEARS_IN_SECONDS = 365 * 24 * 60 * 60 ;
-    const unlockTime = currentTimeStampInSeconds + ONE_YEARS_IN_SECONDS;
 
     const lockAmount = hre.ethers.parseEther("1.0");
+    console.log(lockAmount);
     
     const CollateralizedLoan = await hre.ethers.getContractFactory("CollateralizedLoan");
     const collateralizedLoan = await CollateralizedLoan.deploy();
