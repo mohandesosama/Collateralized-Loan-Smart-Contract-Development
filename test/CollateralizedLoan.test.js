@@ -1,7 +1,8 @@
 // test/CollateralizedLoan.test.js
 
 const { expect } = require("chai");
-const { ethers } = require("ethers");
+const { ethers } = require("hardhat");
+const hre =require("hardhat")
 
 describe("CollateralizedLoan", function () {
   let CollateralizedLoan;
@@ -11,8 +12,8 @@ describe("CollateralizedLoan", function () {
   let addr2;
 
   beforeEach(async function () {
-    [owner, addr1, addr2] = await ethers.getSigners();
-    CollateralizedLoan = await ethers.getContractFactory("CollateralizedLoan");
+    [owner, addr1, addr2] = await hre.ethers.getSigners();
+    CollateralizedLoan = await hre.ethers.getContractFactory("CollateralizedLoan");
     collateralizedLoan = await CollateralizedLoan.deploy();
     await collateralizedLoan.deployed();
   });
