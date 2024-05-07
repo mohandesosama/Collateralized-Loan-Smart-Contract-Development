@@ -5,13 +5,11 @@ async function main() {
     const ONE_YEARS_IN_SECONDS = 365 * 24 * 60 * 60 ;
     const unlockTime = currentTimeStampInSeconds + ONE_YEARS_IN_SECONDS;
 
-    const lockAmount = hre.ethers.utils.parseEther("1.0");
-    //console.log(lockAmount);
+    const lockAmount = hre.ethers.parseEther("1.0");
+    
     const CollateralizedLoan = await hre.ethers.getContractFactory("CollateralizedLoan");
-    const collateralizedLoan = await CollateralizedLoan.deploy(unlockTime,{value: lockAmount});
-    await collateralizedLoan.deployed();
-
-    console.log(`address of contract is ${collateralizedLoan.address}`);
+    const collateralizedLoan = await CollateralizedLoan.deploy();
+    console.log(`address of contract is ${await collateralizedLoan.getAddress()}`);
 }
 
 main()
