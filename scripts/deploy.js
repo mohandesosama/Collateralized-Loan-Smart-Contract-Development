@@ -1,5 +1,6 @@
-const { lock } = require("ethers");
 const hre = require("hardhat");
+//works fine with me 
+//npm install --save-dev hardhat @nomiclabs/hardhat-ethers@npm:hardhat-deploy-ethers ethers
 
 async function main() {
 
