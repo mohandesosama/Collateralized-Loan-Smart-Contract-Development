@@ -7,14 +7,10 @@ Transaction ID: 0x11912ced8d411d04c9146adf6d356fccb93d8d037c2436f5c3e99c19503403
 
 ## Sample output of the test cases 
 ```cmd
- CollateralizedLoan
-Testing: Should deposit collateral
+  CollateralizedLoan
     ✔ Should deposit collateral
-Testing: Should fund loan
     ✔ Should fund loan
-Testing: Should repay loan
     ✔ Should repay loan
-Testing: Should claim collateral
     ✔ Should claim collateral
 
   Lock
@@ -34,5 +30,5 @@ Testing: Should claim collateral
         ✔ Should transfer the funds to the owner
 
 
-  13 passing (627ms)
+  13 passing (628ms)
 ```
