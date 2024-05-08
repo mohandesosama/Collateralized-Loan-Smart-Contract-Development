@@ -4,8 +4,8 @@ const hre = require("hardhat");
 
 async function main() {
 
-    const lockAmount = hre.ethers.parseEther("1.0");
-    console.log(lockAmount);
+    //const lockAmount = hre.ethers.parseEther("1.0");
+    //console.log(lockAmount);
     
     const CollateralizedLoan = await hre.ethers.getContractFactory("CollateralizedLoan");
     const collateralizedLoan = await CollateralizedLoan.deploy();

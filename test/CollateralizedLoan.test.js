@@ -1,7 +1,6 @@
 // test/CollateralizedLoan.test.js
 
 const { expect } = require("chai");
-const { ethers } = require("hardhat");
 const hre =require("hardhat")
 
 describe("CollateralizedLoan", function () {
@@ -15,38 +14,38 @@ describe("CollateralizedLoan", function () {
     [owner, addr1, addr2] = await hre.ethers.getSigners();
     CollateralizedLoan = await hre.ethers.getContractFactory("CollateralizedLoan");
     collateralizedLoan = await CollateralizedLoan.deploy();
-    await collateralizedLoan.deployed();
+    //console.log(`address of contract is ${await collateralizedLoan.getAddress()}`);
   });
 
   it("Should deposit collateral", async function () {
     console.log("Testing: Should deposit collateral");
-    await collateralizedLoan.connect(addr1).depositCollateral(3600, { value: ethers.utils.parseEther("1") });
+    await collateralizedLoan.connect(addr1).depositCollateral(3600, { value: hre.ethers.parseEther("1") });
     const loan = await collateralizedLoan.loans(addr1.address);
     expect(loan.borrower).to.equal(addr1.address);
-    expect(loan.collateralAmount).to.equal(ethers.utils.parseEther("1"));
+    expect(loan.collateralAmount).to.equal(hre.ethers.parseEther("1"));
   });
 
   it("Should fund loan", async function () {
     console.log("Testing: Should fund loan");
-    await collateralizedLoan.connect(addr1).depositCollateral(3600, { value: ethers.utils.parseEther("1") });
-    await collateralizedLoan.connect(owner).fundLoan(addr1.address, { value: ethers.utils.parseEther("2") });
+    await collateralizedLoan.connect(addr1).depositCollateral(3600, { value: hre.ethers.parseEther("1") });
+    await collateralizedLoan.connect(owner).fundLoan(addr1.address, { value: hre.ethers.parseEther("2") });
     const loan = await collateralizedLoan.loans(addr1.address);
     expect(loan.funded).to.equal(true);
   });
 
   it("Should repay loan", async function () {
     console.log("Testing: Should repay loan");
-    await collateralizedLoan.connect(addr1).depositCollateral(3600, { value: ethers.utils.parseEther("1") });
-    await collateralizedLoan.connect(owner).fundLoan(addr1.address, { value: ethers.utils.parseEther("2") });
-    await collateralizedLoan.connect(addr1).repayLoan({ value: ethers.utils.parseEther("2.2") });
+    await collateralizedLoan.connect(addr1).depositCollateral(3600, { value: hre.ethers.parseEther("1") });
+    await collateralizedLoan.connect(owner).fundLoan(addr1.address, { value: hre.ethers.parseEther("2") });
+    await collateralizedLoan.connect(addr1).repayLoan({ value: hre.ethers.parseEther("2.2") });
     const loan = await collateralizedLoan.loans(addr1.address);
     expect(loan.repaid).to.equal(true);
   });
 
   it("Should claim collateral", async function () {
     console.log("Testing: Should claim collateral");
-    await collateralizedLoan.connect(addr1).depositCollateral(3600, { value: ethers.utils.parseEther("1") });
-    await collateralizedLoan.connect(owner).fundLoan(addr1.address, { value: ethers.utils.parseEther("2") });
+    await collateralizedLoan.connect(addr1).depositCollateral(3600, { value: hre.ethers.parseEther("1") });
+    await collateralizedLoan.connect(owner).fundLoan(addr1.address, { value: hre.ethers.parseEther("2") });
     await network.provider.send("evm_increaseTime", [3600 * 24 * 8]); // increase time to after due date
     await collateralizedLoan.connect(owner).claimCollateral(addr1.address);
     const loan = await collateralizedLoan.loans(addr1.address);
